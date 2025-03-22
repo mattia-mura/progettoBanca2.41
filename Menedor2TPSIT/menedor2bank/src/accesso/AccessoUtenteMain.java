@@ -79,13 +79,13 @@ public class AccessoUtenteMain {
     }//accesso
 
     public static boolean addInfo (String nomeUtente, Portafoglio portafoglio, ContoBanca contoBanca, LocalDate localDate) {
-        File Utente = new File(name+nomeUtente+".txt");
+        File Utente = new File(name+nomeUtente+".csv");
 
         if ( Utente.exists() ) {
 
 
             try {
-                BufferedWriter BW = new BufferedWriter(new FileWriter(nomeUtente + ".csv", true));
+                BufferedWriter BW = new BufferedWriter(new FileWriter(Utente, true));
 
                 String s = portafoglio.getSchei()+";"+contoBanca.getSaldo()+";"+ localDate.getDayOfMonth()+";"+localDate.getMonthValue()+";"+ localDate.getYear()+";";
 
@@ -113,14 +113,14 @@ public class AccessoUtenteMain {
         } catch (FileNotFoundException e) {
             throw new RuntimeException("File not found: " + f.getAbsolutePath(), e);
         }
-        double x[] = new double [3];
+        double x[] = new double [2];
         while(scanner.hasNextLine()){
             String riga = scanner.nextLine();
             if (!scanner.hasNextLine()){
                 String dati[]= riga.split(";");
-                for (int i=0;i<2;i++) {
-                    x[i] = Double.valueOf(dati[i]);
-                }
+                x[0] = Double.valueOf(dati[0]);
+                x[1] = Double.valueOf(dati[1]);
+
             }
         }
         return x;
@@ -143,11 +143,9 @@ public class AccessoUtenteMain {
             String riga = scanner.nextLine();
             if (!scanner.hasNextLine()){
                 String dati[]= riga.split(";");
-                for (int i = 2; i<5; i++) {
-                    for (int j=0;j<3;j++) {
-                        x[j] = Integer.valueOf(dati[i]);
-                    }
-                }
+                x[0] = Integer.valueOf(dati[2]);
+                x[1] = Integer.valueOf(dati[3]);
+                x[2] = Integer.valueOf(dati[4]);
             }
         }
         return x;

@@ -1,6 +1,7 @@
 package menu;
 
 import accesso.RoundedButton;
+import main.Investimenti;
 import main.Main;
 
 import javax.swing.*;
@@ -22,8 +23,7 @@ public class InvestiFrame extends JFrame {
 
     int nMaxInvestimenti = 5;
     int nInvestimenti = 0;
-    int tempInvestimento[] = new int [nMaxInvestimenti]; //mesi mancanti alla fine dell'investimento.
-    double Investimenti[] = new double [nMaxInvestimenti]; //contiene gli investimentin fino al suo return
+    int tempInvestimenti;
 
     int probabilitaGuadagno = 0;
     int percentualeMinMaxGuadagno[] = new int[2];
@@ -237,18 +237,19 @@ public class InvestiFrame extends JFrame {
             dispose();
         }
 
+
         if (durataInvestimento == 1 ) {
 
-            tempInvestimento [nInvestimenti]= 1;
+            tempInvestimenti= 1;
 
         } else {
             if (durataInvestimento == 2 ) {
 
-                tempInvestimento [nInvestimenti]= 5;
+                tempInvestimenti= 5;
 
             } else {
 
-                tempInvestimento [nInvestimenti]= 10;
+                tempInvestimenti= 10;
 
             }
         }
@@ -282,6 +283,15 @@ public class InvestiFrame extends JFrame {
         }
 
     }
+    public double getImportoInvestimento() {
+        return importoInvestimento;
+    }
+
+    public int getTempInvestimenti() {
+        return tempInvestimenti;
+    }
+
+    private double schei = 0.0;
 
     public double confermaInvestimento() {
         // Verifica che durata e rischio siano stati selezionati
@@ -298,6 +308,8 @@ public class InvestiFrame extends JFrame {
                 JOptionPane.showMessageDialog(this, "Investimento confermato: " + soldi + "€", "Successo", JOptionPane.INFORMATION_MESSAGE);
                 investimentoo(soldi, probabilitaGuadagno, percentualeMinMaxGuadagno, percentualeMinMaxPerdita);
                 MainFrame.depositPreleva(2,soldi,MainFrame.getPortafoglio(),MainFrame.getContoBanca());
+                investimentoo(soldi, probabilitaGuadagno, percentualeMinMaxGuadagno, percentualeMinMaxPerdita);
+                schei =  investimentoo(soldi, probabilitaGuadagno, percentualeMinMaxGuadagno, percentualeMinMaxPerdita);
                 return soldi;
             } else {
                 JOptionPane.showMessageDialog(this, "L'importo deve essere maggiore di 0.", "Errore", JOptionPane.ERROR_MESSAGE);
@@ -305,10 +317,19 @@ public class InvestiFrame extends JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Inserisci un numero valido.", "Errore", JOptionPane.ERROR_MESSAGE);
         }
+        Investimenti inv = new Investimenti(tempInvestimenti,soldi);
         MainFrame.depositPreleva(2,soldi,MainFrame.getPortafoglio(),MainFrame.getContoBanca());
+        dispose();
         return soldi;
     }
 
+
+    Investimenti inv = new Investimenti(tempInvestimenti,schei);
+
+    public Investimenti getInvestimenti() {
+        return inv;
+    }
+    
     private void pulisciPannello() {
         pannello.removeAll();
         pannello.revalidate();
@@ -331,26 +352,6 @@ public class InvestiFrame extends JFrame {
 
         return capitale;
     }
-    /*
-    public static double[] trovaInvestimenti (){
-        double ar[] = new double [nMaxInvestimenti];
-        int nInvestimentitrovati = 0;
-        for (int i=0;i<nMaxInvestimenti;i++){
-            tempInvestimento[i] --;
-            if (tempInvestimento[i] == 0){
-                ar[nInvestimentitrovati] = Investimenti [i];
-                nInvestimentitrovati++;
-                for (int j=i;j<nMaxInvestimenti;j++){
-                    Investimenti[i]=Investimenti[i+1];
-                    tempInvestimento[i]=tempInvestimento[i+1];
-                }
-                Investimenti [nMaxInvestimenti-1] = 0;
-                tempInvestimento [nMaxInvestimenti-1] = 0;
-            }
-        }
-        return ar;
-    }
-    */
 
 
 }

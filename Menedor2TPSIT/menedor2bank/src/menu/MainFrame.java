@@ -22,9 +22,7 @@ public class MainFrame extends JFrame {
     private double[] dati = AccessoUtenteMain.getLastMoney(nomeee);
     private int[] datiInt = AccessoUtenteMain.getLastTime(nomeee);
 
-
-
-    private LocalDate data = LocalDate.of(datiInt[0],datiInt[1],datiInt[2]);
+    private LocalDate data = LocalDate.of(datiInt[2],datiInt[1],datiInt[0]);
 
     private JPanel pannello;
     private GridBagConstraints gbc;
@@ -39,9 +37,13 @@ public class MainFrame extends JFrame {
     private JButton bottoneSalvaEEsci;
     private String[] datiUtente;
 
-    private static Portafoglio portafoglioSolidi = new Portafoglio(0);
+
+    private static String nome2 = AccessoFrame.getDatiUtente()[0];
+    private static double schei = AccessoUtenteMain.getLastMoney(nome2)[0];
+    private static double saldo = AccessoUtenteMain.getLastMoney(nome2)[1];
+    private static Portafoglio portafoglioSolidi = new Portafoglio(schei);
     public static Portafoglio getPortafoglio(){return portafoglioSolidi;}
-    private static ContoBanca contoVirtuale = new ContoBanca(0);
+    private static ContoBanca contoVirtuale = new ContoBanca(saldo);
     public static ContoBanca getContoBanca(){return contoVirtuale;}
 
     JLabel logo = new JLabel(new ImageIcon("D:/progettiJava/Menedor2TPSIT/menedor2bank/resource/Logo_MenedorBank.png"));
@@ -195,6 +197,8 @@ public class MainFrame extends JFrame {
         }
     }
 
+    public Investimenti getInvestimenti(int i){return investimenti.get(i);}
+
     // Gestisci operazione di deposito
     public void deposita() {
         gestisciTransazione(1);
@@ -211,9 +215,7 @@ public class MainFrame extends JFrame {
     public void nuovoInvestimento() {
         InvestiFrame frameInvestimento = new InvestiFrame();
         contoVirtuale.decrementaSaldo(frameInvestimento.confermaInvestimento());
-        //investimenti.add(new Investimenti(//durata,guadagno));
-        //chiudi pannellino
-        dispose();
+        //investimenti.add(InvestiFrame.getInvestimenti());
         aggiornaUI();
     }
 
@@ -231,9 +233,10 @@ public class MainFrame extends JFrame {
         portafoglioSolidi.aumentaSchei(100);
         data = data.plusMonths(1); // Avanza la data di 1 mese
 
-
-
-        for (int i=0;i<5;i++){
+        /*
+        boolean fine = false;
+        for (int i=0;i<5 && !fine;i++){
+            if (investimenti.get(i)==null){fine = true;}
             investimenti.get(i).scalaTempo();
             if (investimenti.get(i).getTempo()==0){
                 contoVirtuale.aumentaSaldo(investimenti.get(i).getGuadagno());
@@ -241,7 +244,7 @@ public class MainFrame extends JFrame {
                 //stampa pannellino con hai guadagnato
             }
         }
-
+        */
 
         aggiornaUI();
     }
@@ -256,7 +259,7 @@ public class MainFrame extends JFrame {
     // Salva ed esci dall'applicazione
     public void salvaEEsci() {
 
-        if (AccessoUtenteMain.addInfo(AccessoFrame.getDatiUtente()[0] + ".csv", portafoglioSolidi, contoVirtuale, data)) {
+        if (AccessoUtenteMain.addInfo(AccessoFrame.getDatiUtente()[0], portafoglioSolidi, contoVirtuale, data)) {
             JOptionPane.showMessageDialog(this, "Dati salvati.");
         } else {
             JOptionPane.showMessageDialog(this, "Dati Non salvati.", "Informazione", JOptionPane.WARNING_MESSAGE);
@@ -272,7 +275,7 @@ public class MainFrame extends JFrame {
             portafoglio.decrementaSchei(money);
             contoBancario.aumentaSaldo(money);
         }else {
-            if ( (money > portafoglio.getSchei() ) || (money<=0) ){return false;}
+            if ( (money > contoBancario.getSaldo() ) || (money<=0) ){return false;}
             portafoglio.aumentaSchei(money);
             contoBancario.decrementaSaldo(money);
 
