@@ -10,6 +10,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 
+import menu.MainFrame;
+
+import static menu.MainFrame.getContoVirtuale;
+
 public class InvestiFrame extends JFrame {
 
     private int durataInvestimento = -1;
@@ -288,7 +292,7 @@ public class InvestiFrame extends JFrame {
         double soldi = 0.0;
         try {
             soldi = Double.parseDouble(campoImporto.getText());
-            if (soldi > 0 /*|| soldi < contoVirtuale*/) {
+            if (soldi > 0 && soldi < MainFrame.getContoVirtuale()) {
                 indirizzoInvestimenti(); // Ora può essere chiamato in sicurezza
                 importoInvestimento = soldi;
                 JOptionPane.showMessageDialog(this, "Investimento confermato: " + soldi + "€", "Successo", JOptionPane.INFORMATION_MESSAGE);

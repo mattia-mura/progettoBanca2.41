@@ -3,8 +3,9 @@ package menu;
 import accesso.AccessoUtenteMain;
 import main.ContoBanca;
 import accesso.AccessoFrame;
+import main.Investimenti;
 import main.Portafoglio;
-
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -47,8 +48,8 @@ public class MainFrame extends JFrame {
 
     int nMaxInvestimenti = 5;
     int nInvestimenti = 0;
-    int tempInvestimento[] = new int [nMaxInvestimenti]; //mesi mancanti alla fine dell'investimento.
-    double Investimenti[] = new double [nMaxInvestimenti]; //contiene gli investimentin fino al suo return
+    Vector <Investimenti> investimenti = new Vector <Investimenti> (5,0);
+
 
     int probabilitaGuadagno = 0;
     int percentualeMinMaxGuadagno[] = new int[2];
@@ -148,6 +149,10 @@ public class MainFrame extends JFrame {
         setVisible(true);
     }
 
+    public static double getContoVirtuale() {
+        return contoVirtuale.getSaldo();
+    }
+
 
     // Crea un bottone stilizzato con effetti hover
     private JButton creaBottoneStilizzato(String testo) {
@@ -206,6 +211,8 @@ public class MainFrame extends JFrame {
     public void nuovoInvestimento() {
         InvestiFrame frameInvestimento = new InvestiFrame();
         contoVirtuale.decrementaSaldo(frameInvestimento.confermaInvestimento());
+        investimenti.add(new Investimenti(//durata,guadagno));
+        //chiudi pannellino
         aggiornaUI();
     }
 
@@ -222,15 +229,18 @@ public class MainFrame extends JFrame {
     public void avanzaMese() {
         portafoglioSolidi.aumentaSchei(100);
         data = data.plusMonths(1); // Avanza la data di 1 mese
-        /*
-        double[] array = InvestiFrame.trovaInvestimenti();
-        for (int i=0;i<5;i++){
-            if (array[i] != 0){
-                //stampa e fai investimenti
-            }
 
+
+
+        for (int i=0;i<5;i++){
+            investimenti.get(i).scalaTempo();
+            if (investimenti.get(i).getTempo()==0){
+                investimenti.get(i).getGuadagno();
+                contoVirtuale.aumentaSaldo(investimenti.get(i).getGuadagno());
+                //stampa pannellino con hai guadagnato
+            }
         }
-        */
+
 
         aggiornaUI();
     }
@@ -245,10 +255,10 @@ public class MainFrame extends JFrame {
     // Salva ed esci dall'applicazione
     public void salvaEEsci() {
 
-        if (AccessoUtenteMain.addInfo(AccessoFrame.getDatiUtente()[0]+".csv", portafoglioSolidi,contoVirtuale,data)){
-            //dati salvati
-        }else{
-            //dati non salvati
+        if (AccessoUtenteMain.addInfo(AccessoFrame.getDatiUtente()[0] + ".csv", portafoglioSolidi, contoVirtuale, data)) {
+            JOptionPane.showMessageDialog(this, "Dati salvati.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Dati Non salvati.", "Informazione", JOptionPane.WARNING_MESSAGE);
         }
 
         dispose();
