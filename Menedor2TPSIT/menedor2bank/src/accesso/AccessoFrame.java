@@ -1,12 +1,15 @@
 package accesso;
 
 import main.Tools;
+import menu.MainFrame;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 
 public class AccessoFrame extends JFrame {
 
@@ -227,7 +230,9 @@ public class AccessoFrame extends JFrame {
                 }
             }
         }
-
+        LocalDate x = LocalDate.now() ;
+        LocalDate data = LocalDate.of(x.getYear(),x.getMonthValue(),x.getDayOfMonth());
+        AccessoUtenteMain.addInfo(AccessoFrame.getDatiUtente()[0]+".csv", MainFrame.getPortafoglio(),MainFrame.getContoBanca(),data);
         //JOptionPane.showMessageDialog(this, "Registrazione avvenuta con successo", "Successo", JOptionPane.INFORMATION_MESSAGE);
         //dispose(); // Chiude la finestra di registrazione e mostra il login
     }

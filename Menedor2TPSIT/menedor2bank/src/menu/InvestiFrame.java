@@ -285,9 +285,9 @@ public class InvestiFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Seleziona prima durata e livello di rischio.", "Errore", JOptionPane.ERROR_MESSAGE);
             return 0.0;
         }
-
+        double soldi = 0.0;
         try {
-            double soldi = Double.parseDouble(campoImporto.getText());
+            soldi = Double.parseDouble(campoImporto.getText());
             if (soldi > 0 /*|| soldi < contoVirtuale*/) {
                 indirizzoInvestimenti(); // Ora può essere chiamato in sicurezza
                 importoInvestimento = soldi;
@@ -300,7 +300,8 @@ public class InvestiFrame extends JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Inserisci un numero valido.", "Errore", JOptionPane.ERROR_MESSAGE);
         }
-        return 0.0;
+        MainFrame.depositPreleva(2,soldi,MainFrame.getPortafoglio(),MainFrame.getContoBanca());
+        return soldi;
     }
 
     private void pulisciPannello() {

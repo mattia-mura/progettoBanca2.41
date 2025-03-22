@@ -21,7 +21,7 @@ public class MainFrame extends JFrame {
     private int mese = (int) AccessoUtenteMain.getLastSomething(nome,3);
     private int anno = (int) AccessoUtenteMain.getLastSomething(nome,4);
 
-    private LocalDate data = LocalDate.of(giorno,mese,anno);
+    private LocalDate data = LocalDate.of(anno,mese,giorno);
 
     private JPanel pannello;
     private GridBagConstraints gbc;
@@ -36,8 +36,10 @@ public class MainFrame extends JFrame {
     private JButton bottoneSalvaEEsci;
     private String[] datiUtente;
 
-    private Portafoglio portafoglioSolidi = new Portafoglio(0);
-    private ContoBanca contoVirtuale = new ContoBanca(0);
+    private static Portafoglio portafoglioSolidi = new Portafoglio(0);
+    public static Portafoglio getPortafoglio(){return portafoglioSolidi;}
+    private static ContoBanca contoVirtuale = new ContoBanca(0);
+    public static ContoBanca getContoBanca(){return contoVirtuale;}
 
     JLabel logo = new JLabel(new ImageIcon("E:/Menedor2.1/tpsit 2 nuovissimo/menedor2bestgoat/src/main/resources/Logo_MenedorBank.png"));
 
@@ -259,5 +261,7 @@ public class MainFrame extends JFrame {
         return true;
 
     }
+
+
 
 }
