@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import accesso.AccessoFrame;
+import main.Transizioni;
 
 public class MainFrame extends JFrame {
 
@@ -41,7 +42,7 @@ public class MainFrame extends JFrame {
     private static ContoBanca contoVirtuale = new ContoBanca(0);
     public static ContoBanca getContoBanca(){return contoVirtuale;}
 
-    JLabel logo = new JLabel(new ImageIcon("E:/Menedor2.1/tpsit 2 nuovissimo/menedor2bestgoat/src/main/resources/Logo_MenedorBank.png"));
+    JLabel logo = new JLabel(new ImageIcon("D:\\progettiJava\\Menedor2TPSIT\\menedor2bank\\resource\\Logo_MenedorBank.png"));
 
     int nMaxInvestimenti = 5;
     int nInvestimenti = 0;
@@ -53,6 +54,7 @@ public class MainFrame extends JFrame {
     int percentualeMinMaxPerdita[] = new int[2];
 
     public MainFrame(String[] datiUtente) {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.datiUtente = datiUtente;
 
         // Impostazioni finestra
@@ -233,16 +235,21 @@ public class MainFrame extends JFrame {
     }
 
     // Placeholder per altre operazioni
-    public void transizioni() {}
+    public void transizioni() {
+        Transizioni frameTransizioni = new Transizioni();
+        //stampa file nella finestra;
+        aggiornaUI();
+    }
 
     // Salva ed esci dall'applicazione
     public void salvaEEsci() {
+        /*
         if (AccessoUtenteMain.addInfo(AccessoFrame.getDatiUtente()[0]+".csv", portafoglioSolidi,contoVirtuale,data)){
             //dati salvati
         }else{
             //dati non salvati
         }
-
+        */
         dispose();
     }
 
