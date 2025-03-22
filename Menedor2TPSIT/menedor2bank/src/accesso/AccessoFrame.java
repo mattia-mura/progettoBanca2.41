@@ -230,9 +230,6 @@ public class AccessoFrame extends JFrame {
                 }
             }
         }
-        LocalDate x = LocalDate.now() ;
-        LocalDate data = LocalDate.of(x.getYear(),x.getMonthValue(),x.getDayOfMonth());
-        AccessoUtenteMain.addInfo(AccessoFrame.getDatiUtente()[0]+".csv", MainFrame.getPortafoglio(),MainFrame.getContoBanca(),data);
         //JOptionPane.showMessageDialog(this, "Registrazione avvenuta con successo", "Successo", JOptionPane.INFORMATION_MESSAGE);
         //dispose(); // Chiude la finestra di registrazione e mostra il login
     }

@@ -1,8 +1,7 @@
 package menu;
 
-import main.ContoBanca;
-import main.Main;
 import accesso.AccessoUtenteMain;
+import main.ContoBanca;
 import accesso.AccessoFrame;
 import main.Portafoglio;
 
@@ -12,17 +11,19 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
-import accesso.AccessoFrame;
+
 import main.Transizioni;
+
 
 public class MainFrame extends JFrame {
 
-    String nome =AccessoFrame.getDatiUtente()[0];
-    private int giorno = (int) AccessoUtenteMain.getLastSomething(nome,2);
-    private int mese = (int) AccessoUtenteMain.getLastSomething(nome,3);
-    private int anno = (int) AccessoUtenteMain.getLastSomething(nome,4);
+    String nomeee = AccessoFrame.getDatiUtente()[0];
+    private double[] dati = AccessoUtenteMain.getLastMoney(nomeee);
+    private int[] datiInt = AccessoUtenteMain.getLastTime(nomeee);
 
-    private LocalDate data = LocalDate.of(anno,mese,giorno);
+
+
+    private LocalDate data = LocalDate.of(datiInt[2],datiInt[3],datiInt[4]);
 
     private JPanel pannello;
     private GridBagConstraints gbc;
@@ -243,13 +244,13 @@ public class MainFrame extends JFrame {
 
     // Salva ed esci dall'applicazione
     public void salvaEEsci() {
-        /*
+
         if (AccessoUtenteMain.addInfo(AccessoFrame.getDatiUtente()[0]+".csv", portafoglioSolidi,contoVirtuale,data)){
             //dati salvati
         }else{
             //dati non salvati
         }
-        */
+
         dispose();
     }
 

@@ -293,6 +293,7 @@ public class InvestiFrame extends JFrame {
                 importoInvestimento = soldi;
                 JOptionPane.showMessageDialog(this, "Investimento confermato: " + soldi + "€", "Successo", JOptionPane.INFORMATION_MESSAGE);
                 investimentoo(soldi, probabilitaGuadagno, percentualeMinMaxGuadagno, percentualeMinMaxPerdita);
+                MainFrame.depositPreleva(2,soldi,MainFrame.getPortafoglio(),MainFrame.getContoBanca());
                 return soldi;
             } else {
                 JOptionPane.showMessageDialog(this, "L'importo deve essere maggiore di 0.", "Errore", JOptionPane.ERROR_MESSAGE);
