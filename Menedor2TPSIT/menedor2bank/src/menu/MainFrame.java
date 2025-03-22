@@ -23,7 +23,7 @@ public class MainFrame extends JFrame {
 
 
 
-    private LocalDate data = LocalDate.of(datiInt[2],datiInt[3],datiInt[4]);
+    private LocalDate data = LocalDate.of(datiInt[0],datiInt[1],datiInt[2]);
 
     private JPanel pannello;
     private GridBagConstraints gbc;

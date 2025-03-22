@@ -143,8 +143,10 @@ public class AccessoUtenteMain {
             String riga = scanner.nextLine();
             if (!scanner.hasNextLine()){
                 String dati[]= riga.split(";");
-                for (int i=2;i<5;i++) {
-                    x[i] = Integer.valueOf(dati[i]);
+                for (int i = 2; i<5; i++) {
+                    for (int j=0;j<3;j++) {
+                        x[j] = Integer.valueOf(dati[i]);
+                    }
                 }
             }
         }
