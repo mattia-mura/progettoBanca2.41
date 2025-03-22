@@ -21,7 +21,7 @@ public class AccessoFrame extends JFrame {
     private static String[] datiUtente = new String[2];
     private AccessoUtenteMain aU = new AccessoUtenteMain();
     //JLabel logo = new JLabel(new ImageIcon(getClass().getResource("/logo_MenedorBank.png")));
-    JLabel logo = new JLabel(new ImageIcon("\"D:\\\\progettiJava\\\\Menedor2TPSIT\\\\menedor2bank\\\\resource\\\\Logo_MenedorBank.png"));
+    JLabel logo = new JLabel(new ImageIcon("D:/progettiJava/Menedor2TPSIT/menedor2bank/resource/Logo_MenedorBank.png"));
     //URL imgURL = getClass().getClassLoader().getResource("Logo_MenedorBank.png");
 
     public AccessoFrame() {

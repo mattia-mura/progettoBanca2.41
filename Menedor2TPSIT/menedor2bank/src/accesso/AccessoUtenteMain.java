@@ -54,7 +54,6 @@ public class AccessoUtenteMain {
         File Utente = new File(name+nomeUtente+".txt");
         if ( Utente.exists() ) {
             try ( BufferedReader BW = new BufferedReader (new FileReader( Utente ) ) ){
-                //Utente.createNewFile();
                 String passwordUtent = BW.readLine();
                 if( passwordUtent.equals(password) ) {return true;}
             } catch (IOException e) {
@@ -66,32 +65,23 @@ public class AccessoUtenteMain {
 
     public static boolean addInfo (String nomeUtente, Portafoglio portafoglio, ContoBanca contoBanca, LocalDate localDate) {
         File Utente = new File(name+nomeUtente+".txt");
-        BufferedWriter BW = null;
+
         if ( Utente.exists() ) {
 
 
             try {
-                BW = new BufferedWriter(new FileWriter(nomeUtente + ".csv", true));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            String s = portafoglio.getSchei()+";"+contoBanca.getSaldo()+";"+ localDate.getDayOfMonth()+";"+localDate.getMonthValue()+";"+ localDate.getYear();
-            try {
+                BufferedWriter BW = new BufferedWriter(new FileWriter(nomeUtente + ".csv", true));
+
+                String s = portafoglio.getSchei()+";"+contoBanca.getSaldo()+";"+ localDate.getDayOfMonth()+";"+localDate.getMonthValue()+";"+ localDate.getYear();
+
                 BW.write("\n" +s);//cosa devi scrivere
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            try {
+
+
                 BW.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
             return true;
-        }
-        try {
-            BW.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
         return false;
     }//addInfo

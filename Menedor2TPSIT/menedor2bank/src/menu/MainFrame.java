@@ -42,7 +42,7 @@ public class MainFrame extends JFrame {
     private static ContoBanca contoVirtuale = new ContoBanca(0);
     public static ContoBanca getContoBanca(){return contoVirtuale;}
 
-    JLabel logo = new JLabel(new ImageIcon("D:\\progettiJava\\Menedor2TPSIT\\menedor2bank\\resource\\Logo_MenedorBank.png"));
+    JLabel logo = new JLabel(new ImageIcon("D:/progettiJava/Menedor2TPSIT/menedor2bank/resource/Logo_MenedorBank.png"));
 
     int nMaxInvestimenti = 5;
     int nInvestimenti = 0;
