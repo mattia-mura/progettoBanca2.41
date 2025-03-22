@@ -211,8 +211,9 @@ public class MainFrame extends JFrame {
     public void nuovoInvestimento() {
         InvestiFrame frameInvestimento = new InvestiFrame();
         contoVirtuale.decrementaSaldo(frameInvestimento.confermaInvestimento());
-        investimenti.add(new Investimenti(//durata,guadagno));
+        //investimenti.add(new Investimenti(//durata,guadagno));
         //chiudi pannellino
+        dispose();
         aggiornaUI();
     }
 
@@ -235,8 +236,8 @@ public class MainFrame extends JFrame {
         for (int i=0;i<5;i++){
             investimenti.get(i).scalaTempo();
             if (investimenti.get(i).getTempo()==0){
-                investimenti.get(i).getGuadagno();
                 contoVirtuale.aumentaSaldo(investimenti.get(i).getGuadagno());
+                String input = JOptionPane.showInputDialog(this, investimenti.get(i).getGuadagno());
                 //stampa pannellino con hai guadagnato
             }
         }

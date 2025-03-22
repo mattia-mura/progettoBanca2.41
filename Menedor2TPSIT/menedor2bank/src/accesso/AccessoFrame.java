@@ -142,6 +142,8 @@ public class AccessoFrame extends JFrame {
     private void login() {
         String username = campoUsername.getText().trim();
         String password = new String(campoPassword.getPassword()).trim();
+        datiUtente[0] = username;
+        datiUtente[1] = password;
 
         if (username.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Username o password non possono essere vuoti", "Errore", JOptionPane.ERROR_MESSAGE);
